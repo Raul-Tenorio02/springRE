@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Lista de Itens</title>
+</head>
+<body>
+<h1>Inventory</h1>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Category</th>
+    <th>Actions</th>
+  </tr>
+  <tr th:each="item : ${items}">
+    <td th:text="${item.id}"></td>
+    <td th:text="${item.name}"></td>
+    <td th:text="${item.description}"></td>
+    <td th:text="${item.itemCategory}"></td>
+    <td>
+      <form th:action="@{/items/delete/{id}(id=${item.id})}" method="post">
+        <button type="submit">Discard</button>
+      </form>
+    </td>
+  </tr>
+</table>
+
+<a th:href="@{/items/new}">Add New Item</a>
+</body>
+</html>

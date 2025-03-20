@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Add Item</title>
+</head>
+<body>
+<h1>New Item</h1>
+
+<form th:action="@{/items}" method="post">
+  <label>Name:</label>
+  <input type="text" id="name" name="name" required>
+
+  <label>Description:</label>
+  <input type="text" id="description" name="description">
+
+  <label>Category:</label>
+  <select name="itemCategory">
+    <option th:each="category : ${T(dev.raul.springRE2.Model.Item.ItemCategory).values()}"
+            th:value="${category}"
+            th:text="${category}">
+    </option>
+  </select>
+
+  <button type="submit">Submit</button>
+</form>
+</body>
+</html>

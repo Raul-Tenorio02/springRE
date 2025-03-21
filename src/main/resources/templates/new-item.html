@@ -1,30 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Item</title>
+  <link rel="stylesheet" th:href="@{/css/new-item.css}">
 </head>
 <body>
-<h1>New Item</h1>
+  <h1>New Item</h1>
+  <form th:action="@{/items}" method="post" enctype="multipart/form-data">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
 
-<form th:action="@{/items}" method="post" enctype="multipart/form-data">
-  <label for="name">Name:</label>
-  <input type="text" id="name" name="name" required>
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" required>
 
-  <label for="description">Description:</label>
-  <input type="text" id="description" name="description">
+    <label for="itemCategory">Category:</label>
+    <select id="itemCategory" name="itemCategory" required>
+      <option th:each="category : ${T(dev.raul.springRE2.Model.Item.ItemCategory).values()}"
+              th:value="${category}"
+              th:text="${category}">
+      </option>
+    </select>
 
-  <label for="itemCategory">Category:</label>
-  <select id="itemCategory" name="itemCategory">
-    <option th:each="category : ${T(dev.raul.springRE2.Model.Item.ItemCategory).values()}"
-            th:value="${category}"
-            th:text="${category}">
-    </option>
-  </select>
+    <label for="icon">Item Icon:</label>
+    <input type="file" id="icon" name="icon" accept="/image/*" required>
 
-  <label for="icon">Item Icon:</label>
-  <input type="file" id="icon" name="icon" accept="/image/*" required>
-
-  <button type="submit">Submit</button>
-</form>
+    <button type="submit">Submit</button>
+  </form>
 </body>
 </html>

@@ -12,6 +12,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -27,7 +29,8 @@ public class ItemViewController {
     //READ
     @GetMapping
     public String listItems(Model model) {
-        model.addAttribute("items", itemService.getAll());
+        List<Item> items = itemService.getAll();
+        model.addAttribute("items", items != null ? items : new ArrayList<>());
         return "items";
     }
 

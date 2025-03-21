@@ -1,0 +1,65 @@
+body {
+    background-image: url("../images/layout/rpd_background.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+form {
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    align-self: flex-start;
+}
+
+form input, form button {
+    padding: 5px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 13px;
+    box-sizing: border-box;
+}
+
+form input[type="file"] {
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+}
+
+form button {
+    background-color: #5cb85c;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #4cae4c;
+}
+h1 {
+    position: absolute;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}

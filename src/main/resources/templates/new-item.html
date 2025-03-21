@@ -6,20 +6,23 @@
 <body>
 <h1>New Item</h1>
 
-<form th:action="@{/items}" method="post">
-  <label>Name:</label>
+<form th:action="@{/items}" method="post" enctype="multipart/form-data">
+  <label for="name">Name:</label>
   <input type="text" id="name" name="name" required>
 
-  <label>Description:</label>
+  <label for="description">Description:</label>
   <input type="text" id="description" name="description">
 
-  <label>Category:</label>
-  <select name="itemCategory">
+  <label for="itemCategory">Category:</label>
+  <select id="itemCategory" name="itemCategory">
     <option th:each="category : ${T(dev.raul.springRE2.Model.Item.ItemCategory).values()}"
             th:value="${category}"
             th:text="${category}">
     </option>
   </select>
+
+  <label for="icon">Item Icon:</label>
+  <input type="file" id="icon" name="icon" accept="/image/*" required>
 
   <button type="submit">Submit</button>
 </form>

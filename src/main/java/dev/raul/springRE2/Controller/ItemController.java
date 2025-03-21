@@ -3,7 +3,6 @@ package dev.raul.springRE2.Controller;
 import dev.raul.springRE2.Model.Item.Item;
 import dev.raul.springRE2.Model.Item.ItemCategory;
 import dev.raul.springRE2.Service.ItemService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

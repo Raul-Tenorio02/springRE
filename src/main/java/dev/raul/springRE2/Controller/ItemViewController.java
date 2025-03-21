@@ -5,6 +5,14 @@ import dev.raul.springRE2.Service.ItemService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/items")
@@ -32,7 +40,15 @@ public class ItemViewController {
 
     //CREATE
     @PostMapping
-    public String createItem(@ModelAttribute Item item) {
+    public String createItem(@ModelAttribute Item item, @RequestParam("icon")MultipartFile iconFile) throws IOException {
+        String uploadDir = "src/main/resources/static/images/";
+        String fileName = UUID.randomUUID() + "-" + iconFile.getOriginalFilename();
+        Path filePath = Paths.get(uploadDir + fileName);
+
+        Files.copy(iconFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+        item.setIconPath("/images/" + fileName);
+
         itemService.save(item);
         return "redirect:/items";
     }

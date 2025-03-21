@@ -20,6 +20,8 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private ItemCategory itemCategory;
 
+    private String iconPath;
+
     public Long getId() {
         return id;
     }
@@ -50,6 +52,14 @@ public class Item {
 
     public void setItemCategory(ItemCategory itemCategory) {
         this.itemCategory = itemCategory;
+    }
+
+    public String getIconPath() {
+        return iconPath;
+    }
+
+    public void setIconPath(String iconPath) {
+        this.iconPath = iconPath;
     }
 
 }

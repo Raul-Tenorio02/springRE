@@ -1,14 +1,10 @@
 package dev.raul.springRE2.Model.Item;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "item_tb")
-@NoArgsConstructor
-@AllArgsConstructor
-public class Item {
+public abstract class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +17,17 @@ public class Item {
     private ItemCategory itemCategory;
 
     private String iconPath;
+
+    public Item() {
+    }
+
+    public Item(Long id, String name, String description, ItemCategory itemCategory, String iconPath) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.itemCategory = itemCategory;
+        this.iconPath = iconPath;
+    }
 
     public Long getId() {
         return id;

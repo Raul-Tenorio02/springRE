@@ -25,7 +25,7 @@ public class ItemService {
     //FIND BY ID
     public Optional<Item> findById(Long id) {return itemRepository.findById(id);}
 
-    // FIND BY CATEGORY (corrigido)
+    // FIND BY CATEGORY
     public List<Item> findByItemCategory(ItemCategory category) {
         return itemRepository.findByItemCategory(category);
     }

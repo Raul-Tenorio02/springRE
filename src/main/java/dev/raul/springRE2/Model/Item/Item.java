@@ -1,9 +1,13 @@
 package dev.raul.springRE2.Model.Item;
 
 import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "item_tb")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "item_type", discriminatorType = DiscriminatorType.STRING)
+@NoArgsConstructor
 public abstract class Item {
 
     @Id
@@ -17,9 +21,6 @@ public abstract class Item {
     private ItemCategory itemCategory;
 
     private String iconPath;
-
-    public Item() {
-    }
 
     public Item(Long id, String name, String description, ItemCategory itemCategory, String iconPath) {
         this.id = id;

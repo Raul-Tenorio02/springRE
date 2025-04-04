@@ -1,41 +1,82 @@
 package dev.raul.springRE2.Model.Item.Key;
 
+import dev.raul.springRE2.Model.Item.Files.File;
 import dev.raul.springRE2.Model.Item.Item;
 import dev.raul.springRE2.Model.Item.ItemCategory;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import dev.raul.springRE2.Service.ItemService;
+import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
+import java.util.Map;
+import java.util.Set;
+
 @Entity
-@Table(name = "key_tb")
+@DiscriminatorValue("KEY")
 @NoArgsConstructor
-public class KeyItem extends Item {
+public class KeyItem extends Item implements KeyInterface {
 
-    private final KeyCategory keyCategory;
-    private int quantity;
+    private final ItemService itemService;
 
-    public KeyItem(Long id, String name, String description, ItemCategory itemCategory, String iconPath, KeyCategory keyCategory) {
+    @Enumerated(EnumType.STRING)
+    private KeyCategory keyCategory;
+
+    private Integer keyQuantity;
+
+    public KeyItem(Long id, String name, String description, ItemCategory itemCategory, String iconPath, ItemService itemService, KeyCategory keyCategory) {
         super(id, name, description, itemCategory, iconPath);
+        this.itemService = itemService;
         this.keyCategory = keyCategory;
     }
 
-    public KeyItem(Long id, String name, String description, ItemCategory itemCategory, String iconPath, KeyCategory keyCategory, int quantity) {
+    public KeyItem(Long id, String name, String description, ItemCategory itemCategory, String iconPath, ItemService itemService, KeyCategory keyCategory, Integer keyQuantity) {
         super(id, name, description, itemCategory, iconPath);
+        this.itemService = itemService;
         this.keyCategory = keyCategory;
-        this.quantity = quantity;
+        this.keyQuantity = keyQuantity;
     }
 
     public KeyCategory getKeyCategory() {
         return keyCategory;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public void setKeyCategory(KeyCategory keyCategory) {
+        this.keyCategory = keyCategory;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public Integer getKeyQuantity() {
+        return keyQuantity;
     }
 
+    public void setKeyQuantity(Integer keyQuantity) {
+        this.keyQuantity = keyQuantity;
+    }
+
+    @Override
+    public File developFilm(KeyItem film) {
+        if (this.keyCategory == KeyCategory.FILM) {
+            switch (film.getId()) {
+                case 38: return itemService.findById().orElse(null);
+                case 39: return itemService.findById().orElse(null);
+                case 40: return itemService.findById().orElse(null);
+                case 41: return itemService.findById().orElse(null);
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public KeyItem combineKeyItems(KeyItem otherKeyItem){
+        if (this.getItemCategory() != ItemCategory.KEY && otherKeyItem.getItemCategory() != ItemCategory.KEY) {
+            return null;
+        }
+
+        Map<Set<Long>, KeyItem> keyCrafts = Map.of(
+                Set.of(itemService.findById().orElse(), itemService.findById().orElse()), itemService.findById().orElse(),
+                Set.of(itemService.findById().orElse(), itemService.findById().orElse()), itemService.findById().orElse()
+        );
+        Set<Long> keySet = Set.of(this.getId(), otherKeyItem.getId());
+
+        return keyCrafts.getOrDefault(keySet, null);
+    }
 
 }

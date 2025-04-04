@@ -2,34 +2,34 @@ package dev.raul.springRE2.Model.Item.Weaponry.Ammunition;
 
 import dev.raul.springRE2.Model.Item.Item;
 import dev.raul.springRE2.Model.Item.ItemCategory;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "ammo_tb")
+@DiscriminatorValue("AMMUNITION")
 @NoArgsConstructor
 public class Ammo extends Item {
 
-    private int quantity;
+    private Integer ammoQuantity;
 
+    @Enumerated(EnumType.STRING)
     private AmmoCategory ammoCategory;
 
-    public Ammo(Long id, String name, String description, ItemCategory itemCategory, String iconPath, AmmoCategory ammoCategory, int quantity) {
+    public Ammo(Long id, String name, String description, ItemCategory itemCategory, String iconPath, AmmoCategory ammoCategory, Integer ammoQuantity) {
         super(id, name, description, itemCategory, iconPath);
         this.ammoCategory = ammoCategory;
-        this.quantity = quantity;
+        this.ammoQuantity = ammoQuantity;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public Integer getAmmoQuantity() {
+        return ammoQuantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setAmmoQuantity(Integer ammoQuantity) {
+        this.ammoQuantity = ammoQuantity;
     }
 
-    public int updateQuantity(int quantity, int n) {
+    public int updateAmmoQuantity(int quantity, int n) {
         return quantity * n;
     }
 

@@ -21,6 +21,7 @@ public class ItemController {
     //GET
     @GetMapping
     public List<Item> getAll(){return itemService.getAll();}
+
     //GET BY ID
     @GetMapping("/{id}")
     public Optional<Item> getById(@PathVariable Long id){
@@ -32,13 +33,5 @@ public class ItemController {
     public List<Item> getByCategory(@PathVariable ItemCategory category) {
         return itemService.findByItemCategory(category);
     }
-
-    //POST
-    @PostMapping
-    public Item create(@RequestBody Item item){return itemService.save(item);}
-
-    //DELETE
-    @DeleteMapping("/{id}")
-    public void delete (@PathVariable Long id){itemService.delete(id);}
 
 }

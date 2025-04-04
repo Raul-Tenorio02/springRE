@@ -30,16 +30,4 @@ public class ItemService {
         return itemRepository.findByItemCategory(category);
     }
 
-    //CREATE
-    public Item save(Item item){return itemRepository.save(item);}
-
-    //DELETE
-    public void delete(Long id){
-        if(itemRepository.existsById(id)) {
-            itemRepository.deleteById(id);
-        } else {
-            throw new IllegalArgumentException("Item with ID " + id + "not found");
-        }
-    }
-
 }

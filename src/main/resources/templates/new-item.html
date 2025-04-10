@@ -17,7 +17,7 @@
 
     <label for="itemCategory">Category:</label>
     <select id="itemCategory" name="itemCategory" required>
-      <option th:each="category : ${T(dev.raul.springRE2.Model.Item.ItemCategory).values()}"
+      <option th:each="category : ${T(dev.raul.springRE2.Model.Items.ItemCategory).values()}"
               th:value="${category}"
               th:text="${category}">
       </option>

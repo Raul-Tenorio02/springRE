@@ -1,8 +1,8 @@
 package dev.raul.springRE2.Controller;
 
-import dev.raul.springRE2.Model.Item.Item;
-import dev.raul.springRE2.Model.Item.ItemCategory;
-import dev.raul.springRE2.Service.ItemService;
+import dev.raul.springRE2.Model.Items.Item;
+import dev.raul.springRE2.Model.Items.ItemCategory;
+import dev.raul.springRE2.Service.ItemsServices.ItemService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

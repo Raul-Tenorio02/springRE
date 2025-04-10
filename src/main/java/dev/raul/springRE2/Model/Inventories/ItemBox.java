@@ -6,10 +6,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name = "inventory_tb")
+@Table(name = "item_box_tb")
 @Getter
 @Setter
-public class Inventory {
+public class ItemBox {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

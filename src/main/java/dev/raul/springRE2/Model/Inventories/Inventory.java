@@ -7,8 +7,6 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "inventory_tb")
-@Getter
-@Setter
 public class Inventory {
 
     @Id
@@ -23,4 +21,27 @@ public class Inventory {
     @JoinColumn(name = "item_id")
     private Item item;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Character getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(Character characters) {
+        this.characters = characters;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
 }

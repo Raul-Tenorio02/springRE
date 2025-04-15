@@ -21,7 +21,7 @@ public class KeyItem extends Item {
         this.keyCategory = keyCategory;
     }
 
-    public KeyItem(Long id, String name, String description, ItemCategory itemCategory, String iconPath, ItemService itemService, KeyCategory keyCategory, Integer keyQuantity) {
+    public KeyItem(Long id, String name, String description, ItemCategory itemCategory, String iconPath, KeyCategory keyCategory, Integer keyQuantity) {
         super(id, name, description, itemCategory, iconPath);
         this.keyCategory = keyCategory;
         this.keyQuantity = keyQuantity;

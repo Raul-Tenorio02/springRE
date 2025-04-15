@@ -22,15 +22,15 @@ public class ItemBoxService {
         return itemBoxRepository.save(itemBox);
     }
 
-    public Optional<ItemBox> getInItemBoxById(Integer id) {
+    public Optional<ItemBox> getItemBoxById(Integer id) {
         return itemBoxRepository.findById(id);
     }
 
-    public List<ItemBox> getAllItemBoxItems() {
+    public List<ItemBox> getItemBox() {
         return itemBoxRepository.findAll();
     }
 
-    public void deleteItemBoxItem(Integer id) {
+    public void deleteFromItemBox(Integer id) {
         itemBoxRepository.deleteById(id);
     }
 

@@ -7,8 +7,6 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "item_box_tb")
-@Getter
-@Setter
 public class ItemBox {
 
     @Id
@@ -22,5 +20,29 @@ public class ItemBox {
     @ManyToOne
     @JoinColumn(name = "item_id")
     private Item item;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Character getCharacters() {
+        return characters;
+    }
+
+    public void setCharacters(Character characters) {
+        this.characters = characters;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
 
 }

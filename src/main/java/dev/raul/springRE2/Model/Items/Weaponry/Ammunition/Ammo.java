@@ -3,17 +3,17 @@ package dev.raul.springRE2.Model.Items.Weaponry.Ammunition;
 import dev.raul.springRE2.Model.Items.Item;
 import dev.raul.springRE2.Model.Items.ItemCategory;
 import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
 
 @Entity
 @DiscriminatorValue("AMMUNITION")
-@NoArgsConstructor
 public class Ammo extends Item {
 
     private Integer ammoQuantity;
 
     @Enumerated(EnumType.STRING)
     private AmmoCategory ammoCategory;
+
+    public Ammo(){}
 
     public Ammo(Long id, String name, String description, ItemCategory itemCategory, String iconPath, AmmoCategory ammoCategory, Integer ammoQuantity) {
         super(id, name, description, itemCategory, iconPath);

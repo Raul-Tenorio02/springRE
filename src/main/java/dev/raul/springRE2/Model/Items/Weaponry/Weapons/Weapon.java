@@ -1,27 +1,30 @@
 package dev.raul.springRE2.Model.Items.Weaponry.Weapons;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import dev.raul.springRE2.Model.Items.Weaponry.Ammunition.AmmoCategory;
 import dev.raul.springRE2.Model.Items.Item;
 import dev.raul.springRE2.Model.Items.ItemCategory;
 import jakarta.persistence.*;
-import lombok.NoArgsConstructor;
 
 @Entity
 @DiscriminatorValue("WEAPON")
-@NoArgsConstructor
 public class Weapon extends Item {
 
     @Enumerated(EnumType.STRING)
     private WeaponCategory weaponCategory;
 
-    private int magazine;
-    private int maxCapacity;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private Integer magazine;
+
+    private Integer maxCapacity;
 
     @Enumerated(EnumType.STRING)
     private FireType fireType;
 
     @Enumerated(EnumType.STRING)
     private AmmoCategory loadedAmmo;
+
+    public Weapon() {}
 
     public Weapon(Long id, String name, String description, ItemCategory itemCategory, String iconPath, WeaponCategory weaponCategory) {
         super(id, name, description, itemCategory, iconPath);
@@ -45,11 +48,13 @@ public class Weapon extends Item {
         this.loadedAmmo = loadedAmmo;
     }
 
-    public int getMagazine() { return magazine; }
+    public Integer getMagazine() {
+        return magazine;
+    }
 
     public void setMagazine(int magazine) { this.magazine = magazine; }
 
-    public int getMaxCapacity() { return maxCapacity; }
+    public Integer getMaxCapacity() { return maxCapacity; }
 
     public void setMaxCapacity(int maxCapacity) { this.maxCapacity = maxCapacity; }
 

@@ -5,9 +5,13 @@ import dev.raul.springRE2.Model.Items.Recovery.RecoveryCategory;
 import dev.raul.springRE2.Model.Items.Recovery.RecoveryItem;
 import dev.raul.springRE2.Repository.RecoveryRepository;
 import dev.raul.springRE2.Service.ItemsServices.ItemService;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Service
+@Transactional
 public class RecoveryService implements RecoveryInterface {
 
     private final ItemService itemService;
@@ -37,6 +41,8 @@ public class RecoveryService implements RecoveryInterface {
         RecoveryItem mixedHerb = herbMixes.get(herbTypes);
         if (mixedHerb == null) {
             System.out.println("\nThere is no need of mixing these.");
+        } else {
+            recoveryRepository.save(mixedHerb);
         }
         return mixedHerb;
     }

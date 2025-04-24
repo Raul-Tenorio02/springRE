@@ -49,8 +49,9 @@ public class WeaponService implements WeaponInterface {
                 .orElse(null);
         weapon.setLoadedAmmo(ammo.getAmmoCategory());
 
-        int ammoNeeded = weapon.getMaxCapacity() - weapon.getMagazine();
-        weapon.setMagazine(weapon.getMagazine() + Math.min(ammo.getAmmoQuantity(), ammoNeeded));
+        Integer currentMagazine = weapon.getMagazine();
+        int ammoNeeded = weapon.getMaxCapacity() - (currentMagazine != null ? currentMagazine : 0);
+        weapon.setMagazine((currentMagazine != null ? currentMagazine : 0) + Math.min(ammo.getAmmoQuantity(), ammoNeeded));
         ammo.setAmmoQuantity(ammo.getAmmoQuantity() - ammoNeeded);
 
         weaponRepository.save(weapon);
@@ -95,7 +96,7 @@ public class WeaponService implements WeaponInterface {
                 .map(Supplier::get)
                 .map(ammo -> {
                     ammo.setAmmoCategory(weapon.getLoadedAmmo());
-                    ammo.setAmmoQuantity(weapon.getMagazine());
+                    ammo.setAmmoQuantity(Optional.ofNullable(weapon.getMagazine()).orElse(0));
                     weapon.setMagazine(0);
                     weaponRepository.save(weapon);
                     return ammo;
@@ -115,14 +116,15 @@ public class WeaponService implements WeaponInterface {
                 System.out.println("\nYou've shot an enemy with your \"" + weapon.getName() + "\"!");
                 return;
             }
-            if (weapon.getMagazine() == 0) {
+            Integer currentMagazine = weapon.getMagazine();
+            if (currentMagazine == null || currentMagazine == 0) {
                 System.out.println("\nYour weapon is empty!");
             } else {
-                if (bulletsUsed >= weapon.getMagazine()) {
+                if (bulletsUsed >= currentMagazine) {
                     weapon.setMagazine(0);
                     System.out.println("\nYou've shot an enemy with your \"" + weapon.getName() + "\"! Now your weapon is empty");
                 } else {
-                    weapon.setMagazine(weapon.getMagazine() - bulletsUsed);
+                    weapon.setMagazine(currentMagazine - bulletsUsed);
                     System.out.println("\nYou've shot an enemy with your \"" + weapon.getName() + "\"!");
                 }
             }
@@ -151,6 +153,5 @@ public class WeaponService implements WeaponInterface {
         );
         return ammoMap.getOrDefault(weapon.getWeaponCategory(), Set.of()).contains(ammo.getAmmoCategory());
     }
-
 
 }

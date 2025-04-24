@@ -7,10 +7,14 @@ import dev.raul.springRE2.Model.Items.Key.KeyCategory;
 import dev.raul.springRE2.Model.Items.Key.KeyItem;
 import dev.raul.springRE2.Repository.KeyRepository;
 import dev.raul.springRE2.Service.ItemsServices.ItemService;
+import jakarta.transaction.Transactional;
+import org.springframework.stereotype.Service;
 
 import java.util.Map;
 import java.util.Set;
 
+@Service
+@Transactional
 public class KeyService implements KeyInterface {
 
     private final ItemService itemService;

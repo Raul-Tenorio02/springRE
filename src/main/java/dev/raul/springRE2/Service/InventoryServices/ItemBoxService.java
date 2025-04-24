@@ -1,5 +1,6 @@
 package dev.raul.springRE2.Service.InventoryServices;
 
+import dev.raul.springRE2.Model.Inventories.Character;
 import dev.raul.springRE2.Model.Inventories.ItemBox;
 import dev.raul.springRE2.Repository.ItemBoxRepository;
 import jakarta.transaction.Transactional;
@@ -18,20 +19,24 @@ public class ItemBoxService {
         this.itemBoxRepository = itemBoxRepository;
     }
 
-    public ItemBox addToItemBox(ItemBox itemBox) {
-        return itemBoxRepository.save(itemBox);
+    public void addToItemBox(ItemBox itemBox) {
+        itemBoxRepository.save(itemBox);
     }
 
-    public Optional<ItemBox> getItemBoxById(Integer id) {
+    public Optional<ItemBox> getInItemBoxById(Integer id) {
         return itemBoxRepository.findById(id);
     }
 
-    public List<ItemBox> getItemBox() {
-        return itemBoxRepository.findAll();
+    public List<ItemBox> getItemBoxByCharacter(Character character) {
+        return itemBoxRepository.findByCharacters(character);
     }
 
-    public void deleteFromItemBox(Integer id) {
-        itemBoxRepository.deleteById(id);
+    public Optional<ItemBox> findByCharacterAndItemId (Character character, Long itemId) {
+        return itemBoxRepository.findByCharactersAndItemId(character, itemId);
+    }
+
+    public void delete(ItemBox itemBox) {
+        itemBoxRepository.delete(itemBox);
     }
 
 }

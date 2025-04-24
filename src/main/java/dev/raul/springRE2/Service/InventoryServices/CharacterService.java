@@ -26,4 +26,8 @@ public class CharacterService {
         return characterRepository.findAll();
     }
 
+    public Optional<Character> findCharacterByName(String characterName) {
+        return characterRepository.findCharacterByName(characterName);
+    }
+
 }

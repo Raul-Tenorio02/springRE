@@ -2,8 +2,6 @@ package dev.raul.springRE2.Model.Inventories;
 
 import dev.raul.springRE2.Model.Items.Item;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "item_box_tb")

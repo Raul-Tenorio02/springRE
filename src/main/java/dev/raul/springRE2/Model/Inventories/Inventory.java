@@ -2,8 +2,6 @@ package dev.raul.springRE2.Model.Inventories;
 
 import dev.raul.springRE2.Model.Items.Item;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "inventory_tb")
@@ -15,7 +13,7 @@ public class Inventory {
 
     @ManyToOne
     @JoinColumn(name = "character_id")
-    private Character characters;
+    private Character character;
 
     @ManyToOne
     @JoinColumn(name = "item_id")
@@ -29,12 +27,12 @@ public class Inventory {
         this.id = id;
     }
 
-    public Character getCharacters() {
-        return characters;
+    public Character getCharacter() {
+        return character;
     }
 
-    public void setCharacters(Character characters) {
-        this.characters = characters;
+    public void setCharacter(Character character) {
+        this.character = character;
     }
 
     public Item getItem() {

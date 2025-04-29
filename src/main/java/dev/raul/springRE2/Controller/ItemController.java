@@ -18,17 +18,15 @@ public class ItemController {
         this.itemService = itemService;
     }
 
-    //GET
+    //Listing items in database
     @GetMapping
-    public List<Item> getAll(){return itemService.getAll();}
+    public List<Item> getAll(){return itemService.findAllItems();}
 
-    //GET BY ID
     @GetMapping("/{id}")
     public Optional<Item> getById(@PathVariable Long id){
         return itemService.findById(id);
     }
 
-    //GET BY CATEGORY
     @GetMapping("/category/{category}")
     public List<Item> getByCategory(@PathVariable ItemCategory category) {
         return itemService.findByItemCategory(category);

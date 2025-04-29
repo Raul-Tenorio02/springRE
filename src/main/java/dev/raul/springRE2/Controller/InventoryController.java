@@ -24,6 +24,7 @@ public class InventoryController {
         this.characterService = characterService;
     }
 
+    //Listing items from each character's inventory or item box
     @GetMapping
     public List<Inventory> getInventory(@PathVariable String characterName) {
         Character character = characterService.findCharacterByName(characterName)
@@ -38,6 +39,7 @@ public class InventoryController {
         return itemBoxService.getItemBoxByCharacter(character);
     }
 
+    // methods for use items in different manners
     @PostMapping("/collect/{itemId}")
     public void collectItem(@PathVariable String characterName, @PathVariable Long itemId) {
         Character character = characterService.findCharacterByName(characterName)

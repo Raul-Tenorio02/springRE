@@ -1,52 +1,50 @@
 package dev.raul.springRE2.Controller;
 
+import dev.raul.springRE2.Model.Items.Item;
+import dev.raul.springRE2.Model.Items.ItemCategory;
+import dev.raul.springRE2.Service.ItemsServices.ItemService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
+
 @Controller
-@RequestMapping("/items")
+@RequestMapping("/index/items")
 public class ItemViewController {
 
-    /*private final ItemService itemService;
+    private final ItemService itemService;
 
     public ItemViewController(ItemService itemService) {
         this.itemService = itemService;
     }
 
-    //READ
     @GetMapping
     public String listItems(Model model) {
-        List<Item> items = itemService.getAll();
-        model.addAttribute("items", items != null ? items : new ArrayList<>());
+        List<Item> items = itemService.findAllItems();
+        model.addAttribute("items", items);
         return "items";
     }
 
-    //GET CREATE FORM
-    @GetMapping("/new")
-    public String newItemForm(Model model) {
-        model.addAttribute("item", new Item());
-        return "new-item";
+    @GetMapping("/{id}")
+    public String getItemDetails(@PathVariable Long id, Model model) {
+        Optional<Item> item = itemService.findById(id);
+        if (item.isPresent()) {
+            model.addAttribute("item", item.get());
+            return "item-details";
+        } else {
+            //TODO: add error handling
+            return "error";
+        }
     }
 
-    //CREATE
-    @PostMapping
-    public String createItem(@ModelAttribute Item item, @RequestParam("icon")MultipartFile iconFile) throws IOException {
-        String uploadDir = "src/main/resources/static/images/";
-        String fileName = UUID.randomUUID() + "-" + iconFile.getOriginalFilename();
-        Path filePath = Paths.get(uploadDir + fileName);
-
-        Files.copy(iconFile.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-
-        item.setIconPath("/images/" + fileName);
-
-        itemService.save(item);
-        return "redirect:/items";
+    @GetMapping("/category/{category}")
+    public String getItemsByCategory(@PathVariable ItemCategory category, Model model) {
+        List<Item> items = itemService.findByItemCategory(category);
+        model.addAttribute("items", items);
+        model.addAttribute("category", category);
+        return "items-by-category";
     }
 
-    //DELETE BY ID
-    @PostMapping("/delete/{id}")
-    public String deleteItem(@PathVariable Long id) {
-        itemService.delete(id);
-        return "redirect:/items";
-    }*/
 }

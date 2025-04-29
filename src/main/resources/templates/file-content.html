@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${inventoryItem.item.name}"></title>
+</head>
+<body>
+    <h1 th:text="${inventoryItem.item.name}" ></h1>
+    <p th:text="${fileContent}"></p>
+    <a th:href="@{/inventory/{characterName}(characterName=${characterName})}">Back to Inventory</a>
+</body>
+</html>

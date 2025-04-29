@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title th:text="${characterName + ' - Item Box'}"></title>
+</head>
+<body>
+<h1 th:text="${characterName + ' - Item Box'}"></h1>
+<table>
+  <thead>
+  <tr>
+    <th>Item's ID</th>
+    <th>Item's name</th>
+    <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="itemBoxItem : ${itemBox}">
+    <td th:text="${itemBoxItem.id}"></td>
+    <td th:text="${itemBoxItem.item.name}"></td>
+    <td th:text="${itemBoxItem.item.description}"></td>
+  </tr>
+  </tbody>
+</table>
+<a th:href="@{/inventory/{characterName}(characterName=${characterName})}">Back to Inventory</a>
+<a href="/index/items">Return</a>
+</body>
+</html>

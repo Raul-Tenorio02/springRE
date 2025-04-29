@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${characterName + ' - Inventory'}"></title>
+</head>
+<body>
+    <h1 th:text="${characterName + ' - Inventory'}"></h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Item's ID</th>
+                <th>Item's name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="inventoryItem : ${inventory}">
+                <td th:text="${inventoryItem.id}"></td>
+                <td th:text="${inventoryItem.item.name}"></td>
+                <td th:text="${inventoryItem.item.description}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/inventory/{characterName}/itembox(characterName=${characterName})}">Open Item Box</a>
+    <br>
+    <a th:href="@{/inventory/{characterName}/collect(characterName=${characterName})}">Collect an Item</a>
+    <a href="/index/items">Return</a>
+</body>
+</html>

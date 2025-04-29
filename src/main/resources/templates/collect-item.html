@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${'Collecting Item'}" ></title>
+</head>
+<body>
+    <h1 th:text="${'Collecting Item'}" ></h1>
+
+    <div th:if="${errorMessage}" style="color: red;">
+        <p th:text="${errorMessage}" ></p>
+    </div>
+
+    <form th:action="@{/inventory/{characterName}/collect(characterName=${characterName})}" method="get" >
+        <div>
+            <label for="filterType">Filter By:</label>
+            <select id="filterType" name="filterType">
+                <option value="all" th:selected="${filterType == 'all'}">Default</option>
+                <option value="id" th:selected="${filterType == 'id'}">ID</option>
+                <option value="category" th:selected="${filterType == 'category'}">Category</option>
+            </select>
+<!--TODO: add Javascript to improve dynamism -->
+            <label th:if="${filterType == 'id'}" for="filterValueId">ID:</label>
+            <input th:if="${filterType == 'id'}" type="number" id="filterValueId" name="filterValue" th:value="${filterValue}"/>
+
+            <label th:if="${filterType == 'category'}" for="filterValueCategory">Category</label>
+            <select th:if="${filterType == 'category'}" id="filterValueCategory" name="filterValue">
+                <option value="">Select</option>
+                <option th:each="category : ${categories}" th:value="${category}" th:text="${category}" th:selected="${filterValue == category.toString()}"></option>
+            </select>
+
+            <button type="submit">Filter</button>
+        </div>
+        <br/>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item : ${allItems}">
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.description}"></td>
+                <td>
+                    <form th:action="@{/inventory/{characterName}/collect/{itemId}(characterName=${characterName}, itemId=${item.id})}" method="post">
+                        <button type="submit">Collect</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br/>
+    <a th:href="@{/inventory/{characterName}(characterName=${characterName})}">Back To Inventory</a>
+</body>
+</html>

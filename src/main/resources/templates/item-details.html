@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${item.name}"></title>
+</head>
+<body>
+  <h1 th:text="${item.name}"></h1>
+  <p><strong>ID:</strong> <span th:text="${item.id}"></span></p>
+  <p><strong>Description:</strong> <span th:text="${item.description}"></span></p>
+  <p><strong>Category:</strong> <span th:text="${item.itemCategory}"></span></p>
+  <a href="/index/items">Return</a>
+</body>
+</html>
